@@ -2,6 +2,6 @@
   font-family: sans-serif;
   font-style: italic;
 }
-#header {
+.header {
   background-image: url("/img/blog-for-business.jpg");
 }
