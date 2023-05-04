@@ -41,5 +41,6 @@ User.init({
 
 module.exports ={
     viewAdmin,
+    viewArticle
 
 };
