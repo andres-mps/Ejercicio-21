@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
 });
 
 
-class User extends Model {};
+/*class User extends Model {};
 User.init({
         id:{
             type: DataTypes.BIGINT.UNSIGNED,  
@@ -32,11 +32,11 @@ User.init({
         }
     },
 { sequelize, modelName: "user"}
-);
+);*/
 
 async function viewAdmin(req,res){
-    const listado = await User.findAll();
-    res.render("/admin", {listado});
+    
+    res.render("admin");
 };
 
 async function viewArticle(req,res){
