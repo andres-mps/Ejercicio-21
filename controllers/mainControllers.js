@@ -10,34 +10,38 @@ const sequelize = new Sequelize(
         dialect: "mysql",
 });
 
+
+class User extends Model {};
+User.init({
+        id:{
+            type: DataTypes.BIGINT.UNSIGNED,  
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        title : {
+            type: DataTypes.STRING(100),
+            allowNull: false,
+        },
+        content: {
+            type: DataTypes.STRING(1500),
+            allowNull: false,
+        },
+        author:{
+            type: DataTypes.STRING(100),
+            allowNull: false
+        }
+    },
+{ sequelize, modelName: "user"}
+);
+
 async function viewAdmin(req,res){
-    res.render("/admin");
+    const listado = await User.findAll();
+    res.render("/admin", {listado});
 };
 
 async function viewArticle(req,res){
     res.render("article");
 };
-
-/*class User extends Model {};
-User.init({
-        id:{
-            type: DataTypes.BIGINT.UNSIGNED,  //sequelize otortga diccionario- tipo de dato- tiene que ser positivo, por eso el .unsigned
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        firstname : {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-        },
-        lastname: {
-            type: DataTypes.STRING(100),
-            allowNull: false,
-        }
-    },
-{ sequelize, modelName: "user",timestamps:false }
-);*/
-
-
 
 module.exports ={
     viewAdmin,
