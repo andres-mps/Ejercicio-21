@@ -11,7 +11,11 @@ const sequelize = new Sequelize(
 });
 
 async function viewAdmin(req,res){
-    res.redirect("/admin")
+    res.render("/admin");
+};
+
+async function viewArticle(req,res){
+    res.render("/article");
 };
 
 /*class User extends Model {};

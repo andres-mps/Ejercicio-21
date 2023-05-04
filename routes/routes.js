@@ -8,4 +8,6 @@ routes.get("/", (req, res) => {
 
 routes.get("/admin", mainController.viewAdmin);
 
+routes.get("/article", mainController.viewArticle);
+
 module.exports = routes;
