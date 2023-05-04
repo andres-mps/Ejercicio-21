@@ -13,7 +13,7 @@
       crossorigin="anonymous"
     />
     <!--Public CSS-->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <!--Fontawesome-->
     <script
       src="https://kit.fontawesome.com/de522ac2a9.js"
@@ -22,8 +22,11 @@
   </head>
   <body>
     <%- include("partials/navbar.ejs") %>
-    <header><h1>Hack the blog</h1></header>
-    <span>El blog de Hack Academy</span>
+    <header id="header" class="text-center py-3">
+      <h1>Hack the blog</h1>
+      <span>El blog de Hack Academy</span>
+    </header>
+
     <div></div>
     <%- include("partials/footer.ejs") %>
     <!--Bootstrap-->
