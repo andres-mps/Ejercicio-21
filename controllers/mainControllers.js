@@ -40,7 +40,7 @@ async function viewAdmin(req,res){
 };
 
 async function viewArticle(req,res){
-    res.render("/article");
+    res.render("article");
 };
 
 module.exports ={
