@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Article</title>
+  </head>
+  <body>
+    <nav><%- include("partials/nabvar") %></nav>
+    <header>
+      <div class="container">
+        <h1>Man must explore, and this is exploration at its greatest</h1>
+        <span>Creado por Marty McFly el 24 de Setiembre, 2022</span>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <p>
+            Never in all their history have men been able truly to conceive of
+            the world as one: a single sphere, a globe, having the qualities of
+            a globe, a round earth in which all the directions eventually meet,
+            in which there is no center because every point, or none, is center
+            — an equal earth which all men occupy as equals. The airman's earth,
+            if free men make it, will be truly round: a globe in practice, not
+            in theory. Science cuts two ways, of course; its products can be
+            used for both good and evil. But there's no turning back from
+            science. The early warnings about technological dangers also come
+            from science. What was most significant about the lunar voyage was
+            not that man set foot on the Moon but that they set eye on the
+            earth. A Chinese tale tells of some men sent to harm a young girl
+            who, upon seeing her beauty, become her protectors rather than her
+            violators. That's how I felt seeing the Earth for the first time. I
+            could not help but love and cherish her.
+          </p>
+        </div>
+        <div class="row">
+          <h3>Add your comment</h3>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+            />
+            <label for="floatingInput">Name...</label>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Add your comment...</label
+            >
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="button">Button</button>
+          </div>
+          <div class="row">
+            <h3>Comments </h3>
+            <div>
+              <p>
+              </p>
+              <span></span>
+            </div>
+            <div>
+              <p>
+
+              </p>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+        <%- include("partials/footer") %>
+    </footer>
+  </body>
+</html>
