@@ -22,10 +22,24 @@
   </head>
   <body>
     <%- include("partials/navbar.ejs") %>
-    <header class="header" class="text-center py-3">
-      <h1>Hack the blog</h1>
-      <span>El blog de Hack Academy</span>
+    <header class="header text-center py-5 text-white">
+      <h1 class="fw-bold fs-1">Hack the blog</h1>
+      <span class="fw-light">El Blog de Hack Academy</span>
     </header>
+    <section id="home" class="container mt-5">
+      <article class="row mt-2">
+        <div class="col-10 col-md-6 offset-1 offset-md-3">
+          <a class="d-block text-decoration-none" href="#">
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+            <span class="text-secondary"
+              >Natus consequatur iste quia fugiat placeat iure cupiditate
+              sapiente magni molestiae.</span
+            >
+          </a>
+          <hr />
+        </div>
+      </article>
+    </section>
 
     <div></div>
     <%- include("partials/footer.ejs") %>
