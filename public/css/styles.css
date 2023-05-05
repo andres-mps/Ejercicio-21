@@ -5,3 +5,11 @@
 .header {
   background-image: url("/img/blog-for-business.jpg");
 }
+
+h1 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 49px;
+  color: #000000;
+}
