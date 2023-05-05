@@ -1,14 +1,17 @@
+require("dotenv").config();
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
+
 const sequelize = new Sequelize(
-    "ejercicio_blog_21",
-    "root",
-    "50137667",
+    process.env.DB_NAME,
+    process.env.DB_USERNAME,
+    process.env.DB_PASSWORD,
     {
-        host: "localhost",
-        port: 3306,
-        dialect: "mysql",
-});
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      dialect: process.env.DB_DIALECT,
+    }
+  );
 
 
 class Article extends Model {};
