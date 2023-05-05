@@ -1,5 +1,8 @@
 const { Article } = require("../models");
 
+async function viewArticle(req, res) {
+  res.render("article");
+}
 // Display a listing of the resource.
 async function index(req, res) {}
 
@@ -25,6 +28,7 @@ async function destroy(req, res) {}
 // ...
 
 module.exports = {
+  viewArticle,
   index,
   show,
   create,
