@@ -1,11 +1,13 @@
 const express = require("express");
 const routes = express.Router();
-const mainController = require("../controllers/mainControllers.js");
+const homeController = require("../controllers/homeController");
+const adminController = require("../controllers/adminController");
+const articleController = require("../controllers/articleController");
 
-routes.get("/", mainController.viewHome);
+routes.get("/", homeController.viewHome);
 
-routes.get("/admin", mainController.viewAdmin);
+routes.get("/admin", adminController.viewAdmin);
 
-routes.get("/article", mainController.viewArticle);
+routes.get("/article", articleController.viewArticle);
 
 module.exports = routes;
