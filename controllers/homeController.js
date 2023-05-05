@@ -3,5 +3,5 @@ async function viewHome(req, res) {
 }
 
 module.exports = {
-
+  viewHome,
 };
