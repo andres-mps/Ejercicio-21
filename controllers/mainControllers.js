@@ -1,7 +1,7 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
-    "ejercicio_21",
+    "ejercicio_blog_21",
     "root",
     "50137667",
     {
@@ -11,8 +11,8 @@ const sequelize = new Sequelize(
 });
 
 
-/*class User extends Model {};
-User.init({
+class Article extends Model {};
+Article.init({
         id:{
             type: DataTypes.BIGINT.UNSIGNED,  
             primaryKey: true,
@@ -29,10 +29,40 @@ User.init({
         author:{
             type: DataTypes.STRING(100),
             allowNull: false
-        }
+        },
+
     },
-{ sequelize, modelName: "user"}
-);*/
+{ sequelize, modelName: "articles"}
+);
+
+sequelize.sync({alert:true})
+
+class Author extends Model {};
+Author.init({
+        id:{
+            type: DataTypes.BIGINT.UNSIGNED,  
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        firstname : {
+            type: DataTypes.STRING(100),
+            allowNull: false,
+        },
+        lastname: {
+            type: DataTypes.STRING(1500),
+            allowNull: false,
+        },
+        email:{
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+
+    },
+{ sequelize, modelName: "authors"}
+);
+
+sequelize.sync({alert:true})
+
 
 async function viewAdmin(req,res){
     
