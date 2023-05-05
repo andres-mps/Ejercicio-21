@@ -12,32 +12,17 @@ const sequelize = new Sequelize(
   }
 );
 
-class Article extends Model {}
-Article.init(
-  {
-    id: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    title: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    content: {
-      type: DataTypes.STRING(1500),
-      allowNull: false,
-    },
-    author: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-  },
-  { sequelize, modelName: "articles" }
-);
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Se ha entablado una conexión");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
-class Author extends Model {}
-Author.init(
+class User extends Model {}
+User.init(
   {
     id: {
       type: DataTypes.BIGINT.UNSIGNED,
@@ -57,11 +42,31 @@ Author.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "authors" }
+  { sequelize, modelName: "user" }
 );
 
-class Coment extends Model {}
-Coment.init(
+class Article extends Model {}
+Article.init(
+  {
+    id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    title: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.STRING(1500),
+      allowNull: false,
+    },
+  },
+  { sequelize, modelName: "article" }
+);
+
+class Comment extends Model {}
+Comment.init(
   {
     id: {
       type: DataTypes.BIGINT.UNSIGNED,
@@ -73,15 +78,21 @@ Coment.init(
       allowNull: false,
     },
   },
-  { sequelize, modelName: "coments", timestamps: false }
+  { sequelize, modelName: "comment", timestamps: false }
 );
 
-sequelize.sync({ alert: true });
+Article.belongsTo(User);
+User.hasMany(Article);
 
-async function viewHome(req, res) {
-  res.render("home");
-}
+Comment.belongsTo(Article);
+Article.hasMany(Comment);
 
+User.hasMany(Comment);
+Comment.belongsTo(User);
+
+sequelize.sync({ force: true }); //comentada para que no se ejecute cada vez que hay cambios
+//insertar datos de prueba
+// npm run tables-
 async function viewAdmin(req, res) {
   res.render("admin");
 }
@@ -91,7 +102,6 @@ async function viewArticle(req, res) {
 }
 
 module.exports = {
-  viewHome,
   viewAdmin,
   viewArticle,
 };
