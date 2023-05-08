@@ -17,6 +17,10 @@ class Article extends Model {
           type: DataTypes.STRING(1500),
           allowNull: false,
         },
+        image: {
+          type: DataTypes.STRING(255),
+          allowNull: true,
+        },
       },
       { sequelize, modelName: "article" }
     );
