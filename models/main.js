@@ -12,6 +12,8 @@ const sequelize = new Sequelize(
   }
 );
 
+sequelize.sync({ alter: true });
+
 const User = require("/User");
 const Comment = require("/Comment");
 const Article = require("/Article");

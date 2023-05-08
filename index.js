@@ -1,3 +1,4 @@
+const models = require("./models/main");
 require("dotenv").config();
 
 const express = require("express");
