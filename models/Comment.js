@@ -9,6 +9,9 @@ class Comment extends Model {
           primaryKey: true,
           autoIncrement: true,
         },
+        name: {
+          type: DataTypes.STRING(50),
+        },
         content: {
           type: DataTypes.STRING(800),
           allowNull: false,
