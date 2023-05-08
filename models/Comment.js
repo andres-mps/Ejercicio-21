@@ -17,7 +17,7 @@ class Comment extends Model {
           allowNull: false,
         },
       },
-      { sequelize, modelName: "comment", timestamps: false }
+      { sequelize, modelName: "comment" }
     );
     return Comment;
   }
