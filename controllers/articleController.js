@@ -11,7 +11,14 @@ const Comment = require('../models/Comment');
 //   res.render("article", { comments });
 // }
 async function viewArticle(req, res) {
-  res.render("article");
+  try {
+    const comments = await Comment.findAll({ order: [['createdAt', 'DESC']] });
+    const commentCount = await Comment.count();
+    res.render("article", { comments, commentCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving comments");
+  }
 }
 
 async function addComment(req, res) {
@@ -23,6 +30,10 @@ async function addComment(req, res) {
     console.error(error);
     res.status(500).send("Error creating comment");
   }
+}
+
+async function commentsUnder(req, res) {
+
 }
 
 
