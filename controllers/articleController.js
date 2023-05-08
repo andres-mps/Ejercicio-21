@@ -1,4 +1,4 @@
-const Comment = require("./models/comment");
+const Comment = require("./models/Comment.js");
 
 async function viewArticle(req, res) {
   const articleId = req.params.id;
