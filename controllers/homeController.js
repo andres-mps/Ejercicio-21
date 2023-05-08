@@ -15,9 +15,7 @@ async function viewHome(req, res) {
     const year = format(articles[i].createdAt, "yyyy");
     const fullDate = `el ${day} de ${monthUpperCase}${month.slice(1)}, ${year}`;
 
-    articles[i].createdAt = fullDate;
-
-    console.log(fullDate);
+    articles[i].date = fullDate;
   }
 
   for (i = 0; i < articles.length; i++) {
