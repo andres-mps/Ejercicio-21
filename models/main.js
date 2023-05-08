@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
@@ -14,9 +15,9 @@ const sequelize = new Sequelize(
 
 sequelize.sync({ alter: true });
 
-const User = require("/User");
-const Comment = require("/Comment");
-const Article = require("/Article");
+const User = require("./User");
+const Comment = require("./Comment");
+const Article = require("./Article");
 
 User.initModel(sequelize);
 Comment.initModel(sequelize);
