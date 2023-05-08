@@ -27,18 +27,32 @@
       <span class="fw-light">El Blog de Hack Academy</span>
     </header>
     <section id="home" class="container mt-5">
+      <% for (const article of articles){ if(article.id < 4){%>
       <article class="row mt-2">
         <div class="col-10 col-md-6 offset-1 offset-md-3">
-          <a class="d-block text-decoration-none" href="#">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+          <a class="d-block text-decoration-none" href="/article/:id">
+            <h2><%=article.title%></h2>
             <span class="text-secondary"
-              >Natus consequatur iste quia fugiat placeat iure cupiditate
-              sapiente magni molestiae.</span
+              >Creado por <%=article.userId.firstname%>
+              <%=article.userId.lastname%></span
             >
           </a>
           <hr />
         </div>
       </article>
+      <% }else if (article.id === 4){ %>
+      <article class="row mt-2">
+        <div class="col-10 col-md-6 offset-1 offset-md-3">
+          <a class="d-block text-decoration-none" href="/article/:id">
+            <h2><%=article.title%></h2>
+            <span class="text-secondary"
+              >Creado por <%=article.userId.firstname%>
+              <%=article.userId.lastname%></span
+            >
+          </a>
+        </div>
+      </article>
+      <% }} %>
     </section>
 
     <div></div>

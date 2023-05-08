@@ -38,11 +38,11 @@
                 <tr>
                     <th scope="row"><%= article.id %></th>
                     <td><%= article.title %></td>
-                    <td><%= article.content %></td>
+                    <td><%= article.content.slice(0,100)+"..." %></td>
                     <td><%= article.image %></td>
                     <td><%= article.createdAt %></td>
                     <td><%= article.userId %></td>
-                    <td class="d-flex flex-column">
+                    <td class="d-flex flex-column btn-cell">
                       <div>
                         <a class="btn btn-primary" href="" id="edit" role="button">Edit</a>
                       </div>
