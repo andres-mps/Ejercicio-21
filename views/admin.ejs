@@ -41,10 +41,10 @@
                     <td><%= article.content.slice(0,100)+"..." %></td>
                     <td><%= article.image %></td>
                     <td><%= article.createdAt %></td>
-                    <td><%= article.userId %></td>
+                    <td><%= article.userId.firstname %></td>
                     <td class="d-flex flex-column btn-cell">
                       <div>
-                        <a class="btn btn-primary" href="" id="edit" role="button">Edit</a>
+                        <a class="btn btn-primary" href="/edit" id="edit" role="button">Edit</a>
                       </div>
                       <div>
                         <a class="btn btn-danger" href="" role="button">Delete</a>

@@ -12,6 +12,6 @@ routes.get("/article", articleController.viewArticle);
 
 routes.post("/addComment", articleController.addComment);
 
-//routes.post("/admin", );
+routes.post("/edit/:id", adminController.adminEdit);
 
 module.exports = routes;
