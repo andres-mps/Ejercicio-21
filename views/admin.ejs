@@ -34,13 +34,14 @@
             </tr>
             </thead>
             <tbody>
+              <% for(let article of articles){%>
                 <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <th scope="row"><%= article.id %></th>
+                    <td><%= article.title %></td>
+                    <td><%= article.content %></td>
+                    <td><%= article.image %></td>
+                    <td><%= article.createdAt %></td>
+                    <td><%= article.userId %></td>
                     <td class="d-flex flex-column">
                       <div>
                         <a class="btn btn-primary" href="" id="edit" role="button">Edit</a>
@@ -49,7 +50,8 @@
                         <a class="btn btn-danger" href="" role="button">Delete</a>
                       </div>
                     </td>
-                  </tr>                  
+                  </tr>
+              <% } %>                      
             </tbody>
         </table>  
     </div>
