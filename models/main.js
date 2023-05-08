@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
+//const runAllSeeders = require("../seeders/runAllSeeders.js");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -12,8 +13,6 @@ const sequelize = new Sequelize(
     logging: false,
   }
 );
-
-sequelize.sync({ alter: true });
 
 const User = require("./User");
 const Comment = require("./Comment");
@@ -29,11 +28,11 @@ User.hasMany(Article);
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
 
-User.hasMany(Comment);
-Comment.belongsTo(User);
+sequelize.sync({ alter: true });
 
 //sequelize.sync({ alter: true }); //comentada para que no se ejecute cada vez que hay cambios
 //insertar datos de prueba
+//runAllSeeders();
 // npm run tables-*/
 
 module.exports = {
