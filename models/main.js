@@ -23,22 +23,6 @@ User.initModel(sequelize);
 Comment.initModel(sequelize);
 Article.initModel(sequelize);
 
-module.exports = {
-  sequelize,
-  User,
-  Comment,
-  Article,
-};
-
-/*sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Se ha entablado una conexión");
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 Article.belongsTo(User);
 User.hasMany(Article);
 
@@ -48,6 +32,13 @@ Article.hasMany(Comment);
 User.hasMany(Comment);
 Comment.belongsTo(User);
 
-sequelize.sync({ force: true }); //comentada para que no se ejecute cada vez que hay cambios
+//sequelize.sync({ alter: true }); //comentada para que no se ejecute cada vez que hay cambios
 //insertar datos de prueba
 // npm run tables-*/
+
+module.exports = {
+  sequelize,
+  User,
+  Comment,
+  Article,
+};
