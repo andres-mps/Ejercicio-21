@@ -1,25 +1,28 @@
 //en teoría esta función es para que se vean los comentarios en el artículo
 //ordenados por fecha de creación
-const connection = require("../models/main")
+const Comment = require('../models/Comment');
 
+// async function viewArticle(req, res) {
+//   const articleId = req.params.id;
+//   const comments = await Comment.findAll({
+//     where: { articleId },
+//     order: [["createdAt", "ASC"]],
+//   });
+//   res.render("article", { comments });
+// }
 async function viewArticle(req, res) {
-  const articleId = req.params.id;
-  const comments = await Comment.findAll({
-    where: { articleId },
-    order: [["createdAt", "ASC"]],
-  });
-  res.render("article", { comments });
+  res.render("article");
 }
 
 async function addComment(req, res) {
-  try{
-    const { name,content } = req.body;
-    const result = (await connection).execute("INSERT INTO comments (name, content) VALUES (?, ?)", [name, content]);
-    res.redirect("/article");
-} catch (error) {
+  try {
+    const { name, content } = req.body;
+    await Comment.create({ name, content });
+    res.redirect(`/article`);
+  } catch (error) {
     console.error(error);
     res.status(500).send("Error creating comment");
-};
+  }
 }
 
 
