@@ -10,4 +10,6 @@ routes.get("/admin", adminController.viewAdmin);
 
 routes.get("/article", articleController.viewArticle);
 
+routes.post("/addComment", articleController.addComment);
+
 module.exports = routes;

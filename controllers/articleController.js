@@ -10,6 +10,22 @@ async function viewArticle(req, res) {
   res.render("article", { comments });
 }
 
+async function addComment(req, res) {
+  try {
+    const { name, comment } = req.body;
+     const newComment = await Comment.create({
+      name,
+      comment,
+      article: req.params.id,
+     });
+     res.redirect("/article");
+    }catch (error) {
+      console.error(error);
+     }
+  }
+
+
 module.exports = {
   viewArticle,
+  addComment,
 };
