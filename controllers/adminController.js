@@ -20,6 +20,19 @@ async function adminEdit(req, res) {
   return res.render("edit", { article });
 }
 
+async function update(req, res) {
+  const { title, content, img } = req.body;
+  const article = await Article.findByPk(req.params.id);
+
+  article.title = title;
+  article.content = content;
+  article.img = img;
+
+  await article.save();
+
+  return res.redirect("admin");
+}
+
 /* async function edit(req, res) {}
 
 // Update the specified resource in storage.
@@ -31,4 +44,5 @@ async function destroy(req, res) {} */
 module.exports = {
   viewAdmin,
   adminEdit,
+  update,
 };
