@@ -1,5 +1,6 @@
 const { Article } = require("../models/main");
 const { User } = require("../models/main");
+const formidable = require("formidable");
 
 async function viewAdmin(req, res) {
   const articles = await Article.findAll();
@@ -21,24 +22,24 @@ async function adminEdit(req, res) {
 }
 
 async function update(req, res) {
-  const { title, content, img } = req.body;
-  return res.json(req.body);
-  const article = await Article.findByPk(req.params.id);
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/admin",
+    keepExtensions: true,
+  });
 
-  article.title = title;
-  article.content = content;
-  article.img = img;
+  form.parse(req, async (err, fields, files) => {
+    const { title, content, img } = req.body;
+    const article = await Article.findByPk(req.params.id);
 
-  const result = await article.save();
+    article.title = title;
+    article.content = content;
+    article.img = img;
 
-  return res.redirect("admin", { result });
+    const result = await article.save();
+    return res.redirect("admin", { result });
+  });
 }
-
-/*// Update the specified resource in storage.
-async function update(req, res) {}
-
-// Remove the specified resource from storage.
-async function destroy(req, res) {} */
 
 module.exports = {
   viewAdmin,
