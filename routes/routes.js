@@ -8,7 +8,7 @@ routes.get("/", homeController.viewHome);
 
 routes.get("/admin", adminController.viewAdmin);
 
-routes.get("/article", articleController.viewArticle);
+routes.get("/article/:id", articleController.viewArticle);
 
 routes.post("/addComment", articleController.addComment);
 
