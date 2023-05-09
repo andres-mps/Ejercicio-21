@@ -16,4 +16,8 @@ routes.get("/edit/:id", adminController.adminEdit);
 
 routes.post("/edit/:id", adminController.update);
 
+routes.get("/new", (req, res) => res.render("new"));
+
+routes.post("/new", adminController.newArticle);
+
 module.exports = routes;

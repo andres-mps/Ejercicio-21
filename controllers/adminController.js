@@ -41,8 +41,25 @@ async function update(req, res) {
   });
 }
 
+async function newArticle(req, res) {
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img/",
+    keepExtensions: true,
+  });
+
+  form.parse(req, async (err, fields, files) => {
+    const { title, content } = fields;
+
+    await Article.create({ title, content });
+
+    return res.redirect("admin");
+  });
+}
+
 module.exports = {
   viewAdmin,
   adminEdit,
   update,
+  newArticle,
 };
