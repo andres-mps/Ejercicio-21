@@ -9,22 +9,23 @@
     <link href="../css/styles.css" rel="stylesheet">
 </head>
 <body>
-    
-    <form method="post" action="/admin" enctype="multipart/form-data">
+    <div class="container d-flex justify-content-center align-items-center">
+        <form method="post" action="/admin/edit/<%=article.id%>" enctype="multipart/form-data" >
 
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <div>
-            <label for="image" class="form-label">Seleccionar una imagen</label>
-            <input id="image" name="image" type="file" class="form-control" />
-        </div>
+            <div class="mb-3">
+                <label for="text" class="form-label">Edit article</label>
+                <textarea class="form-control" id="text" name="content" rows="3" value="<%article.content%>"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="image" class="form-label">Select image</label>
+                <input id="image" name="image" type="file" class="form-control"/>
+            </div>
+            <div>    
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
 
-
-
-    </form>
-
+        </form>
+    </div>
 
 
 

@@ -13,8 +13,11 @@ async function viewAdmin(req, res) {
 }
 
 async function adminEdit(req, res) {
-  //const articles = await Article.findAll();
-  res.render("/edit");
+  const article = await Article.findByPk(req.params.id);
+  if (!article) {
+    return res.status(404).send("Article not found");
+  }
+  return res.render("edit", { article });
 }
 
 /* async function edit(req, res) {}
