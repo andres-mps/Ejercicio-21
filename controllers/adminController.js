@@ -22,20 +22,19 @@ async function adminEdit(req, res) {
 
 async function update(req, res) {
   const { title, content, img } = req.body;
+  return res.json(req.body);
   const article = await Article.findByPk(req.params.id);
 
   article.title = title;
   article.content = content;
   article.img = img;
 
-  await article.save();
+  const result = await article.save();
 
-  return res.redirect("admin");
+  return res.redirect("admin", { result });
 }
 
-/* async function edit(req, res) {}
-
-// Update the specified resource in storage.
+/*// Update the specified resource in storage.
 async function update(req, res) {}
 
 // Remove the specified resource from storage.
