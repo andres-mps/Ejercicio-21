@@ -11,7 +11,7 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center">
 
-        <form method="post" action="/admin/edit/<%=article.id%>" enctype="multipart/form-data" >
+        <form method="post" action="/edit/<%=article.id%>" enctype="multipart/form-data">
             <label for="title" class="form-label">Edit title</label>
             <input id="title" name="title" type="text" value="<%=article.title%>" class="form-control"/>
             <div class="mb-3">
