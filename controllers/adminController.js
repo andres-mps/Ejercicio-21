@@ -29,15 +29,17 @@ async function update(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    const { title, content, img } = req.body;
+    const { title, content, img } = fields;
     const article = await Article.findByPk(req.params.id);
 
     article.title = title;
     article.content = content;
     article.img = img;
 
-    const result = await article.save();
-    return res.redirect("admin", { result });
+    await article.save();
+    const successMsg = "Artículo actualizado exitosamente.";
+    res.locals.successMsg = successMsg;
+    return res.redirect("/admin");
   });
 }
 
