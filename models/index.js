@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 //const runAllSeeders = require("../seeders/runAllSeeders.js");
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
+  process.env.DB_DATABASE,
   process.env.DB_USERNAME,
   process.env.DB_PASSWORD,
   {
@@ -11,12 +11,12 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
     logging: false,
-  }
+  },
 );
 
 const User = require("./User");
-const Comment = require("./Comment");
 const Article = require("./Article");
+const Comment = require("./Comment");
 
 User.initModel(sequelize);
 Comment.initModel(sequelize);
@@ -28,7 +28,7 @@ User.hasMany(Article);
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
 
-sequelize.sync({ alter: true });
+sequelize.sync({ force: true });
 
 //sequelize.sync({ alter: true }); //comentada para que no se ejecute cada vez que hay cambios
 //insertar datos de prueba
