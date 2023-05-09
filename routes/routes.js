@@ -14,4 +14,6 @@ routes.post("/addComment", articleController.addComment);
 
 routes.get("/edit/:id", adminController.adminEdit);
 
+routes.post("/edit/:id", adminController.update);
+
 module.exports = routes;
