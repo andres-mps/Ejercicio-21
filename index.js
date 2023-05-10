@@ -6,6 +6,10 @@ const app = express();
 const APP_PORT = process.env.APP_PORT || 3000;
 const routes = require("./routes/routes.js");
 
+/*======================== MODULOS AUTENTICACIÓN: ==================================*/
+
+/*======================== MODULOS AUTENTICACIÓN: ==================================*/
+
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));

@@ -20,4 +20,6 @@ routes.get("/new", (req, res) => res.render("new"));
 
 routes.post("/new", adminController.newArticle);
 
+routes.get("/login", (req, res) => res.render("login"));
+
 module.exports = routes;

@@ -59,9 +59,17 @@ async function newArticle(req, res) {
   });
 }
 
+/*============= LOGIN CONTROLLERS  =================*/
+function viewLogin(req, res) {
+  res.render("login");
+}
+
+/*============= LOGIN CONTROLLERS  =================*/
+
 module.exports = {
   viewAdmin,
   adminEdit,
   update,
   newArticle,
+  viewLogin,
 };
