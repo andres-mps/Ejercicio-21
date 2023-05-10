@@ -1,5 +1,5 @@
-const { Article } = require("../models/main");
-const { User } = require("../models/main");
+const { Article } = require("../models");
+const { User } = require("../models");
 const formidable = require("formidable");
 
 async function viewAdmin(req, res) {

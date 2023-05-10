@@ -21,10 +21,6 @@ class User extends Model {
           type: DataTypes.STRING(100),
           allowNull: false,
         },
-        username: {
-          type: DataTypes.STRING(100),
-          allowNull: false,
-        },
         password: {
           type: DataTypes.STRING(100),
           allowNull: false,

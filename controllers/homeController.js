@@ -1,6 +1,6 @@
 const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
-const { Article, User } = require("../models/main");
+const { Article, User } = require("../models");
 
 async function viewHome(req, res) {
   const articles = await Article.findAll({

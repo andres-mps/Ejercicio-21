@@ -1,6 +1,6 @@
-const { Comment } = require("../models/main");
-const { Article } = require("../models/main");
-const { User } = require("../models/main");
+const { Comment } = require("../models");
+const { Article } = require("../models");
+const { User } = require("../models");
 
 async function viewArticle(req, res) {
   try {

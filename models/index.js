@@ -28,7 +28,7 @@ User.hasMany(Article);
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
 
-sequelize.sync({ force: true });
+// sequelize.sync({ force: true });
 
 //sequelize.sync({ alter: true }); //comentada para que no se ejecute cada vez que hay cambios
 //insertar datos de prueba
