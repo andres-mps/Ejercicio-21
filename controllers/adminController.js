@@ -4,11 +4,22 @@ const { User } = require("../models");
 const formidable = require("formidable");
 
 async function viewAdmin(req, res) {
-  const articles = await Article.findAll();
+  /* =============  Página ADMIN despliega TODOS los articulos ===========*/
+  // const articles = await Article.findAll();
+  // for (i = 0; i < articles.length; i++) {
+  //   const name = await User.findByPk(articles[i].userId);
+  //   articles[i].userId = name;
+  // }
+
+  /* =============  Página ADMIN solo despliega articulos del userID autenticado: ===========*/
+  const articles = await Article.findAll({
+    where: { userId: req.user.id },
+  });
   for (i = 0; i < articles.length; i++) {
     const name = await User.findByPk(articles[i].userId);
     articles[i].userId = name;
   }
+
   res.render("admin", { articles });
 }
 

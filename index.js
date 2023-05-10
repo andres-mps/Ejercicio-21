@@ -10,6 +10,14 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcryptjs");
 
+/*============== mensajes EXPRESS FLASH: =========================*/
+const flash = require("express-flash");
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+// app.use(express.session({ cookie: { maxAge: 60000 } }));
+app.use(flash());
+/*============== mensajes EXPRESS FLASH: =========================*/
+
 /*======================== MODULOS AUTENTICACIÓN: ==================================*/
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -17,41 +25,12 @@ app.use(
     secret: "milanesa",
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 app.use(passport.session());
 
-// passport.use(
-//   new LocalStrategy({ usernameField: "email" }, async function (
-//     email,
-//     password,
-//     done
-//   ) => {
-//     try {
-//       const user = await User.findOne({ where: { email: email } });
-//       if (!user) {
-//         console.log("Nombre de usuario no existe.");
-//         return done(null, false, { message: "Credenciales incorrectas." });
-//       }
-//       //const match = await bcrypt.compare(password, user.password);
-//       if (password !== user.password) {
-//         console.log("La contraseña es inválida.");
-//         return done(null, false, { message: "Credenciales incorrectas." });
-//       }
-//       console.log("Credenciales verificadas correctamente");
-//       return done(null, user);
-//     } catch (error) {
-//       console.log(error);
-//       return done(error);
-//     }
-//   }));
-
 passport.use(
-  new LocalStrategy({ usernameField: "email" }, async function (
-    email,
-    password,
-    done
-  ) {
+  new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
     try {
       const user = await User.findOne({ where: { email: email } });
       if (!user) {
@@ -71,7 +50,7 @@ passport.use(
       console.log(error);
       return done(error);
     }
-  })
+  }),
 );
 
 passport.serializeUser((user, done) => {
@@ -87,15 +66,24 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-app.get("/login", (req, res) => res.render("login"));
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "back",
+    successRedirect: "/admin",
     failureRedirect: "/login",
-  })
+  }),
 );
+
+app.get("/logout", (req, res) => {
+  req.session.destroy(function (err) {
+    res.redirect("/");
+  });
+});
+
 // app.post("/login", (req, res, next) => {
 //   passport.authenticate("local", (error, usuario, info) => {
 //     if (error) {
