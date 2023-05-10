@@ -1,15 +1,14 @@
+const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 const { Article } = require("../models");
 const { User } = require("../models");
 const formidable = require("formidable");
 
 async function viewAdmin(req, res) {
   const articles = await Article.findAll();
-
   for (i = 0; i < articles.length; i++) {
     const name = await User.findByPk(articles[i].userId);
     articles[i].userId = name;
   }
-
   res.render("admin", { articles });
 }
 
