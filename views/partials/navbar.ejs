@@ -1,15 +1,21 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">Hack the Blog</a>
+
+    <!-- ====== mensaje BIENVENIDA a usuario ===== -->
     <% if (login) { %>
-      <p style="color: aliceblue;">
+
+    <div class="d-flex flex-column align-items-center">
+      <p class="align-self-center pt-2" style="color: aliceblue">
         <%= `Bienvenido/a ${user.firstname}` %>
       </p>
-      <a class="btn btn-primary" href="/admin" role="button">Admin</a>
-      <% } else {%>
-        <a class="btn btn-primary" href="/login">Iniciar sesión</a>
-        <% } %>
+      <a class="align-self-bottom" href="/logout">Desloguearse</a>
+    </div>
 
+    <a class="btn btn-primary" href="/admin" role="button">Admin</a>
+    <% } else {%>
+    <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+    <% } %>
+    <!-- ====== mensaje BIENVENIDA a usuario ===== -->
   </div>
-
 </nav>
