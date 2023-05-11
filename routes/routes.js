@@ -1,24 +1,36 @@
 const express = require("express");
-const routes = express.Router();
+const router = express.Router();
 const homeController = require("../controllers/homeController");
 const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
+const authController = require("../controllers/authController");
 const ensureAuthenticated = require("../middleware/ensureAuthenticated");
+const makeUserAvailableInViews = require("../middleware/makeUserAvailableInViews");
 
-routes.get("/", homeController.viewHome);
+router.get("/", homeController.viewHome);
 
-routes.get("/admin", ensureAuthenticated, adminController.viewAdmin);
+router.get("/admin", ensureAuthenticated, adminController.viewAdmin);
 
-routes.get("/article/:id", articleController.viewArticle);
+router.get("/article/:id", articleController.viewArticle);
 
-routes.post("/addComment", ensureAuthenticated, articleController.addComment);
+router.post("/addComment", ensureAuthenticated, articleController.addComment);
 
-routes.get("/edit/:id", adminController.adminEdit);
+router.get("/edit/:id", adminController.adminEdit);
 
-routes.post("/edit/:id", adminController.update);
+router.post("/edit/:id", adminController.update);
 
-routes.get("/new", (req, res) => res.render("new"));
+router.get("/new", (req, res) => res.render("new"));
 
-routes.post("/new", adminController.newArticle);
+router.post("/new", adminController.newArticle);
 
-module.exports = routes;
+/*===PRIVATE ROUTES: ADMIN =====*/
+
+router.get("/login", authController.viewLogin);
+router.post("/login", authController.login);
+router.get("/register", authController.viewRegister);
+router.post("/register", authController.register);
+router.get("/logout", authController.logout);
+
+/*=== fin PRIVATE ROUTES: ADMIN =====*/
+
+module.exports = router;

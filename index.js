@@ -6,20 +6,10 @@ const app = express();
 const APP_PORT = process.env.APP_PORT || 3000;
 const routes = require("./routes/routes.js");
 const session = require("express-session");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
+const { passport, passportConfig } = require("./config/passport");
 const bcrypt = require("bcryptjs");
+const makeUserAvailableInViews = require("./middleware/makeUserAvailableInViews");
 
-/*============== mensajes EXPRESS FLASH: =========================*/
-const flash = require("express-flash");
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
-// app.use(express.session({ cookie: { maxAge: 60000 } }));
-app.use(flash());
-/*============== mensajes EXPRESS FLASH: =========================*/
-
-/*======================== MODULOS AUTENTICACIÓN: ==================================*/
-app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "milanesa",
@@ -27,103 +17,10 @@ app.use(
     saveUninitialized: false,
   }),
 );
+
 app.use(passport.session());
-
-passport.use(
-  new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
-    try {
-      const user = await User.findOne({ where: { email: email } });
-      if (!user) {
-        console.log("El usuario no existe.");
-        return done(null, false, { message: "Credenciales incorrectas." });
-      }
-
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        console.log("La contraseña es inválida.");
-        return done(null, false, { message: "Credenciales incorrectas." });
-      }
-
-      console.log("Credenciales verificadas correctamente");
-      return done(null, user);
-    } catch (error) {
-      console.log(error);
-      return done(error);
-    }
-  }),
-);
-
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findByPk(id);
-    done(null, user); // Usuario queda disponible en req.user.
-  } catch (err) {
-    done(err);
-  }
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/admin",
-    failureRedirect: "/login",
-  }),
-);
-
-app.get("/logout", (req, res) => {
-  req.session.destroy(function (err) {
-    res.redirect("/");
-  });
-});
-
-// app.post("/login", (req, res, next) => {
-//   passport.authenticate("local", (error, usuario, info) => {
-//     if (error) {
-//       return next(error);
-//     }
-//     if (!usuario) {
-//       return res.redirect("/login");
-//     }
-//     req.logIn(usuario, (error) => {
-//       if (error) {
-//         return next(error);
-//       }
-//       req.session.save(() => {
-//         res.redirect(req.session.returnTo || "/");
-//       });
-//     });
-//   })(req, res, next);
-// });
-
-app.get("/register", (req, res) => res.render("register"));
-
-app.post("/register", async (req, res) => {
-  const { firstname, lastname, email, password } = req.body;
-  const [user, created] = await User.findOrCreate({
-    where: { email: email },
-    defaults: {
-      firstname,
-      lastname,
-      email,
-      password: await bcrypt.hash(password, 5),
-    },
-  });
-  if (created) {
-    req.login(user, () => res.redirect("/login"));
-  } else {
-    res.redirect("back");
-  }
-});
-
-/*======================== MODULOS AUTENTICACIÓN: ==================================*/
+passportConfig();
+app.use(makeUserAvailableInViews);
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));

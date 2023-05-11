@@ -19,7 +19,6 @@ async function viewAdmin(req, res) {
     const name = await User.findByPk(articles[i].userId);
     articles[i].userId = name;
   }
-
   res.render("admin", { articles });
 }
 
