@@ -22,7 +22,6 @@ async function viewHome(req, res) {
     const user = await User.findByPk(articles[i].userId);
     articles[i].userId = user;
   }
-
   res.render("home", { articles });
 }
 

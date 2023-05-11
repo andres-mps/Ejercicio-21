@@ -5,7 +5,7 @@ const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
 const authController = require("../controllers/authController");
 const ensureAuthenticated = require("../middleware/ensureAuthenticated");
-const makeUserAvailableInViews = require("../middleware/makeUserAvailableInViews");
+const mwFlash = require("../middleware/flash");
 
 router.get("/", homeController.viewHome);
 
@@ -13,7 +13,7 @@ router.get("/admin", ensureAuthenticated, adminController.viewAdmin);
 
 router.get("/article/:id", articleController.viewArticle);
 
-router.post("/addComment", ensureAuthenticated, articleController.addComment);
+router.post("/addComment", articleController.addComment);
 
 router.get("/edit/:id", adminController.adminEdit);
 

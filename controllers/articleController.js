@@ -19,7 +19,7 @@ async function addComment(req, res) {
   try {
     const { name, content } = req.body;
     await Comment.create({ name, content });
-    res.redirect(`/article`);
+    res.redirect(`back`);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error creating comment");

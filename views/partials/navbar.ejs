@@ -1,6 +1,15 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">Hack the Blog</a>
-    <a class="btn btn-primary" href="/admin" role="button">Admin</a>
+    <% if (login) { %>
+      <p style="color: aliceblue;">
+        <%= `Bienvenido/a ${user.firstname}` %>
+      </p>
+      <a class="btn btn-primary" href="/admin" role="button">Admin</a>
+      <% } else {%>
+        <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+        <% } %>
+
   </div>
+
 </nav>

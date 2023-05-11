@@ -31,19 +31,28 @@
       </div>
       <div class="row">
         <h3>Add your comment</h3>
+
         <form action="/addComment" method="POST" id="comment-form">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="name" name="name" placeholder="" />
+            <input type="text" class="form-control" id="name" name="name" placeholder="" <%=!login ? "disabled" : "" %>
+            />
             <label for="name">Name...</label>
           </div>
           <div class="mb-3">
             <label for="content" class="form-label">Add your comment...</label>
-            <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+            <textarea class="form-control" id="content" name="content" rows="3" <%=!login ? "disabled" : ""
+              %>></textarea>
           </div>
           <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">Submit</button>
+
+            <%if (login) {%>
+              <button class="btn btn-primary" type="submit">Submit</button>
           </div>
         </form>
+        <%} else {%>
+          <p>You must be logged to add comments.</p>
+          <a class="btn btn-success" href="/login">Iniciar sesión</a>
+          <%}%>
       </div>
       <div class="row">
         <h3 class="m-3">Comments(<%= commentCount%>)</h3>

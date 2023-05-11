@@ -1,7 +1,6 @@
 const { passport, passportConfig } = require("../config/passport");
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
-
 function viewLogin(req, res) {
   res.render("login");
 }
@@ -10,7 +9,16 @@ function login(req, res) {
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
-  });
+    failureFlash: {
+      type: "failureFlash",
+      message: "Credenciales incorrectas",
+    }, // Establece el mensaje flash en caso de fallo de autenticación
+    successFlash: {
+      type: "successFlash",
+      message: "Las credenciales han sido validadas!",
+    },
+  })(req, res);
+  console.log(req.session);
 }
 
 function viewRegister(req, res) {
