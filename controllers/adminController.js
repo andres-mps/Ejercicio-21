@@ -20,7 +20,6 @@ async function viewAdmin(req, res) {
     articles[i].userId = name;
   }
   res.render("admin", { articles });
-  console.log(res.locals);
 }
 
 async function adminEdit(req, res) {

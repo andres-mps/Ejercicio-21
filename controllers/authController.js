@@ -18,7 +18,6 @@ function login(req, res) {
       message: "Las credenciales han sido validadas!",
     },
   })(req, res);
-  console.log(req.session);
 }
 
 function viewRegister(req, res) {
