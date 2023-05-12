@@ -14,7 +14,7 @@ const isAuthenticated = require("./middleware/isAuthenticated");
 
 app.use(
   session({
-    secret: "milanesa",
+    secret: "textoSectreto",
     resave: false,
     saveUninitialized: false,
   }),
