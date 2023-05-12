@@ -5,17 +5,18 @@
     <!-- ====== mensaje BIENVENIDA a usuario ===== -->
     <% if (login) { %>
 
-    <div class="d-flex flex-column align-items-center">
-      <p class="align-self-center pt-2" style="color: aliceblue">
-        <%= `Bienvenido/a ${user.firstname}` %>
-      </p>
-      <a class="align-self-bottom" href="/logout">Desloguearse</a>
-    </div>
+      <div class="d-flex flex-column align-items-center">
+        <p class="align-self-center pt-2" style="color: aliceblue">
+          <%= `Bienvenido/a ${user.firstname}` %>
+        </p>
+        <a class="align-self-bottom" href="/logout">Desloguearse</a>
+      </div>
 
-    <a class="btn btn-primary" href="/admin" role="button">Admin</a>
-    <% } else {%>
-    <a class="btn btn-primary" href="/login">Iniciar sesión</a>
-    <% } %>
-    <!-- ====== mensaje BIENVENIDA a usuario ===== -->
+      <a class="btn btn-primary" href="/users" role="button">Users</a>
+      <a class="btn btn-primary" href="/admin" role="button">Admin</a>
+      <% } else {%>
+        <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+        <% } %>
+          <!-- ====== mensaje BIENVENIDA a usuario ===== -->
   </div>
 </nav>

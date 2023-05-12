@@ -11,16 +11,21 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
     logging: false,
-  },
+  }
 );
 
 const User = require("./User");
 const Article = require("./Article");
 const Comment = require("./Comment");
+const Role = require("./Role");
 
+Role.initModel(sequelize);
 User.initModel(sequelize);
 Comment.initModel(sequelize);
 Article.initModel(sequelize);
+
+User.belongsTo(Role);
+Role.hasMany(User);
 
 Article.belongsTo(User);
 User.hasMany(Article);
@@ -40,4 +45,5 @@ module.exports = {
   User,
   Comment,
   Article,
+  Role,
 };

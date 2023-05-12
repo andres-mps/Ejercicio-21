@@ -12,6 +12,7 @@ module.exports = async () => {
       lastname: faker.name.lastName(),
       email: faker.internet.email(),
       password: await bcrypt.hash(faker.internet.password(), 5),
+      roleId: faker.datatype.number({ min: 1, max: 4 }),
     });
   }
 

@@ -4,6 +4,7 @@ const homeController = require("../controllers/homeController");
 const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
 const authController = require("../controllers/authController");
+const usersController = require("../controllers/usersController");
 const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 const mwFlash = require("../middleware/flash");
 
@@ -32,5 +33,7 @@ router.post("/register", authController.register);
 router.get("/logout", authController.logout);
 
 /*=== fin PRIVATE ROUTES: ADMIN =====*/
+
+router.get("/users", usersController.viewUsers);
 
 module.exports = router;
