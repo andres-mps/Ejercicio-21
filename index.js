@@ -17,8 +17,9 @@ app.use(
     secret: "milanesa",
     resave: false,
     saveUninitialized: false,
-  }),
+  })
 );
+
 app.use(flash());
 
 app.use(passport.session());
