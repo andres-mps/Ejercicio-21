@@ -34,6 +34,7 @@ router.get("/logout", authController.logout);
 
 /*=== fin PRIVATE ROUTES: ADMIN =====*/
 
-router.get("/users", usersController.viewUsers);
-
+router.get("/users", ensureAuthenticated, usersController.viewUsers);
+router.get("/users/delete/:id", usersController.remove);
+router.post("/users/updateRole/:userId", usersController.updateUserRole);
 module.exports = router;

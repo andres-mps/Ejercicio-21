@@ -33,10 +33,11 @@ async function register(req, res) {
       lastname,
       email,
       password: await bcrypt.hash(password, 5),
+      roleId: 1,
     },
   });
   if (created) {
-    req.login(user, () => res.redirect("/login"));
+    res.redirect("/login");
   } else {
     res.redirect("back");
   }

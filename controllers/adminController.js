@@ -60,11 +60,11 @@ async function newArticle(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
+    const userId = res.locals.user.id;
     const { title, content } = fields;
+    await Article.create({ title, content, userId });
 
-    await Article.create({ title, content });
-
-    return res.redirect("admin");
+    return res.redirect("/admin");
   });
 }
 

@@ -45,15 +45,22 @@
                 <%= user.firstname %>
               </td>
               <td>
-                <%= user.role.name %>
+                <select name="role" id="role" onchange="updateUserRole(<%= user.id %> , this.value)">
 
+                  <% for(let role of roles){%>
+                    <option value="<%= role.id %>" <% if(role.id==user.role.id) { %> selected <% } %>><%= role.name %>
+                    </option>
+                    <% } %>
+                </select>
               </td>
               <td>
                 <%= user.createdAt %>
               </td>
               <td class="d-flex flex-column btn-cell">
                 <div>
-                  <a class="btn btn-danger" href="" role="button">Delete</a>
+
+                  <a class="btn btn-danger" href="users/delete/<%=user.id%>" role="button">Delete</a>
+
                 </div>
               </td>
             </tr>
