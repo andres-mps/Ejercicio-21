@@ -17,10 +17,12 @@ const sequelize = new Sequelize(
 const User = require("./User");
 const Article = require("./Article");
 const Comment = require("./Comment");
+const Role = require("./Role");
 
 User.initModel(sequelize);
 Comment.initModel(sequelize);
 Article.initModel(sequelize);
+Role.initModel(sequelize);
 
 Article.belongsTo(User);
 User.hasMany(Article);
@@ -28,16 +30,22 @@ User.hasMany(Article);
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
 
-// sequelize.sync({ force: true });
+Comment.belongsTo(User);
+User.hasMany(Comment);
 
-//sequelize.sync({ alter: true }); //comentada para que no se ejecute cada vez que hay cambios
-//insertar datos de prueba
-//runAllSeeders();
-// npm run tables-*/
+User.belongsTo(Role);
+Role.hasMany(User),
+  // sequelize.sync({ force: true });
 
-module.exports = {
-  sequelize,
-  User,
-  Comment,
-  Article,
-};
+  //sequelize.sync({ alter: true }); //comentada para que no se ejecute cada vez que hay cambios
+  //insertar datos de prueba
+  //runAllSeeders();
+  // npm run tables-*/
+
+  (module.exports = {
+    sequelize,
+    Role,
+    User,
+    Comment,
+    Article,
+  });

@@ -1,25 +1,18 @@
-const ensureAuthenticated = require("../middleware/ensureAuthenticated");
-const { Article } = require("../models");
-const { User } = require("../models");
+const { Article, User, Role, Comment } = require("../models");
 const formidable = require("formidable");
 
 async function viewAdmin(req, res) {
-  /* =============  Página ADMIN despliega TODOS los articulos ===========*/
-  // const articles = await Article.findAll();
-  // for (i = 0; i < articles.length; i++) {
-  //   const name = await User.findByPk(articles[i].userId);
-  //   articles[i].userId = name;
-  // }
-
-  /* =============  Página ADMIN solo despliega articulos del userID autenticado: ===========*/
   const articles = await Article.findAll({
-    where: { userId: req.user.id },
+    // where: { userId: req.user.id },
+    order: ["createdAt"],
+    include: {
+      model: User,
+      include: Role,
+    },
   });
-  for (i = 0; i < articles.length; i++) {
-    const name = await User.findByPk(articles[i].userId);
-    articles[i].userId = name;
-  }
-  res.render("admin", { articles });
+  // res.json(articles);
+  console.log(req.user);
+  res.render("adminArticles", { articles });
 }
 
 async function adminEdit(req, res) {
@@ -27,13 +20,13 @@ async function adminEdit(req, res) {
   if (!article) {
     return res.status(404).send("Article not found");
   }
-  return res.render("edit", { article });
+  return res.render("editArticle", { article });
 }
 
 async function update(req, res) {
   const form = formidable({
     multiples: true,
-    uploadDir: __dirname + "/admin",
+    uploadDir: __dirname + "/adminArticles",
     keepExtensions: true,
   });
 
@@ -48,7 +41,7 @@ async function update(req, res) {
     await article.save();
     const successMsg = "Artículo actualizado exitosamente.";
     res.locals.successMsg = successMsg;
-    return res.redirect("/admin");
+    return res.redirect("/adminArticles");
   });
 }
 
@@ -61,24 +54,34 @@ async function newArticle(req, res) {
 
   form.parse(req, async (err, fields, files) => {
     const { title, content } = fields;
+    const userId = req.user.id;
+    console.log(userId);
 
-    await Article.create({ title, content });
+    await Article.create({
+      title,
+      content,
+      userId: userId,
+    });
 
-    return res.redirect("admin");
+    return res.redirect("adminArticles");
   });
 }
 
-/*============= LOGIN CONTROLLERS  =================*/
-function viewLogin(req, res) {
-  res.render("login");
+// Remove the specified resource from storage.
+async function destroy(req, res) {
+  const articleId = req.params.id;
+  await Article.destroy({
+    where: {
+      id: articleId,
+    },
+  });
+  res.redirect("/adminArticles");
 }
-
-/*============= LOGIN CONTROLLERS  =================*/
 
 module.exports = {
   viewAdmin,
   adminEdit,
   update,
   newArticle,
-  viewLogin,
+  destroy,
 };

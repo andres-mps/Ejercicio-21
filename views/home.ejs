@@ -15,17 +15,31 @@
     <!--Public CSS-->
     <link rel="stylesheet" href="/css/styles.css" />
     <!--Fontawesome-->
-    <script
-      src="https://kit.fontawesome.com/de522ac2a9.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/de522ac2a9.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <%- include("partials/navbar.ejs") %>
-    <header class="header text-center py-5 text-white">
-      <h1 class="fw-bold fs-1">Hack the blog</h1>
-      <span class="fw-light">El Blog de Hack Academy</span>
-    </header>
+    <%- include("partials/navbar") %>
+
+    <!--============================== SECTION: HERO ==============================-->
+    <section
+      class="hero-section bg-image mb-4"
+      style="
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url('/img/home_cover.jpg');
+        height: 35vh;
+        background-size: cover;
+      "
+    >
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-12 text-center text-white">
+            <h1 class="text-white"><strong>Hack the Blog</strong></h1>
+            <p>El Blog de Hack Academy</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--============================== SECTION: HERO ==============================-->
     <section id="home" class="container mt-5">
       <% for (const article of articles){ if(article.id < 4){%>
       <article class="row mt-2">
@@ -33,8 +47,8 @@
           <a class="d-block text-decoration-none" href="/article/<%= article.id %>">
             <h2><%=article.title%></h2>
             <span class="text-secondary"
-              >Creado por <%=article.userId.firstname%>
-              <%=article.userId.lastname%> <%=article.date%></span
+              >Creado por <%=article.userId.firstname%> <%=article.userId.lastname%>
+              <%=article.date%></span
             >
           </a>
           <hr />
@@ -46,8 +60,8 @@
           <a class="d-block text-decoration-none" href="/article/<%= article.id %>">
             <h2><%=article.title%></h2>
             <span class="text-secondary"
-              >Creado por <%=article.userId.firstname%>
-              <%=article.userId.lastname%> <%=article.date%></span
+              >Creado por <%=article.userId.firstname%> <%=article.userId.lastname%>
+              <%=article.date%></span
             >
           </a>
         </div>

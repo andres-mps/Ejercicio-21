@@ -1,15 +1,12 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const { User } = require("../models");
+const { Role } = require("../models");
 const bcrypt = require("bcryptjs");
 
 function passportConfig() {
   passport.use(
-    new LocalStrategy({ usernameField: "email" }, async function (
-      email,
-      password,
-      done
-    ) {
+    new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
       try {
         const user = await User.findOne({ where: { email: email } });
         if (!user) {
@@ -31,7 +28,7 @@ function passportConfig() {
           message: "Ocurrió un error inesperado. Por favor, reintentar.",
         });
       }
-    })
+    }),
   );
 
   passport.serializeUser((user, done) => {
@@ -40,8 +37,8 @@ function passportConfig() {
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await User.findByPk(id);
-      done(null, user); // Usuario queda disponible en req.user.
+      const user = await User.findByPk(id, { include: Role });
+      return done(null, user); // Usuario queda disponible en req.user.
     } catch (err) {
       done(err);
     }

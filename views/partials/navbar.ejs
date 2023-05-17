@@ -1,6 +1,6 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="/">Hack the Blog</a>
+    <a class="navbar-brand" href="/"><strong>Hack the Blog</strong></a>
 
     <!-- ====== mensaje BIENVENIDA a usuario ===== -->
     <% if (login) { %>
@@ -9,12 +9,16 @@
       <p class="align-self-center pt-2" style="color: aliceblue">
         <%= `Bienvenido/a ${user.firstname}` %>
       </p>
-      <a class="align-self-bottom" href="/logout">Desloguearse</a>
     </div>
-
-    <a class="btn btn-primary" href="/admin" role="button">Admin</a>
+    <div>
+      <a class="btn btn-outline-light" href="/adminArticles" role="button">Admin</a>
+      <a class="btn btn-outline-info" href="/logout">Desloguearse</a>
+    </div>
     <% } else {%>
-    <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+    <div>
+      <a class="btn btn-primary" href="/login">Iniciar sesión</a>
+      <a class="btn btn-outline-primary" href="/registerUser">Registrarse</a>
+    </div>
     <% } %>
     <!-- ====== mensaje BIENVENIDA a usuario ===== -->
   </div>

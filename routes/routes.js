@@ -1,36 +1,56 @@
 const express = require("express");
 const router = express.Router();
-const homeController = require("../controllers/homeController");
+
+const pagesController = require("../controllers/pagesController");
 const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
-const authController = require("../controllers/authController");
-const ensureAuthenticated = require("../middleware/ensureAuthenticated");
-const mwFlash = require("../middleware/flash");
+const commentController = require("../controllers/commentController");
+const userController = require("../controllers/userController");
 
-router.get("/", homeController.viewHome);
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+const atLeastAdmin = require("../middlewares/atLeastAdmin");
+const atLeastEditor = require("../middlewares/atLeastEditor");
+const atLeastWriter = require("../middlewares/atLeastWriter");
+const atLeastReader = require("../middlewares/atLeastReader");
+const isOwner = require("../middlewares/isOwner");
+const atLeastEditorOwner = require("../middlewares/atLeastEditorOwner");
 
-router.get("/admin", ensureAuthenticated, adminController.viewAdmin);
+router.get("/", pagesController.showHome);
 
+router.get("/adminArticles", ensureAuthenticated, atLeastWriter, adminController.viewAdmin);
 router.get("/article/:id", articleController.viewArticle);
 
-router.post("/addComment", articleController.addComment);
+router.post("/article/:id", ensureAuthenticated, atLeastReader, commentController.store);
 
-router.get("/edit/:id", adminController.adminEdit);
-
-router.post("/edit/:id", adminController.update);
-
-router.get("/new", (req, res) => res.render("new"));
-
+router.get(
+  "/admin/editar/:id",
+  ensureAuthenticated,
+  atLeastWriter,
+  isOwner,
+  adminController.adminEdit,
+);
+router.post("/admin/editar/:id", adminController.update);
+router.get(
+  "/admin/eliminar/:id",
+  atLeastWriter,
+  isOwner,
+  atLeastEditorOwner,
+  adminController.destroy,
+);
+router.get("/new", (req, res) => res.render("newArticle"));
 router.post("/new", adminController.newArticle);
 
 /*===PRIVATE ROUTES: ADMIN =====*/
 
-router.get("/login", authController.viewLogin);
-router.post("/login", authController.login);
-router.get("/register", authController.viewRegister);
-router.post("/register", authController.register);
-router.get("/logout", authController.logout);
+router.get("/login", userController.showLogin);
+router.post("/login", userController.login);
+router.get("/registerUser", userController.showRegister);
+router.post("/registerUser", userController.register);
+router.get("/logout", userController.logout);
 
-/*=== fin PRIVATE ROUTES: ADMIN =====*/
+router.get("/adminUsers", ensureAuthenticated, userController.index);
+router.get("/adminUsers/editar/:id", userController.edit);
+router.post("/adminUsers/editar/:id", userController.update);
+router.get("/adminUsers/eliminar/:id", userController.destroy);
 
 module.exports = router;

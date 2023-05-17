@@ -7,10 +7,10 @@ const routes = require("./routes/routes.js");
 const session = require("express-session");
 const { passport, passportConfig } = require("./config/passport");
 
-const makeUserAvailableInViews = require("./middleware/makeUserAvailableInViews");
+const makeUserAvailableInViews = require("./middlewares/makeUserAvailableInViews");
 const flash = require("connect-flash");
-const mwFlash = require("./middleware/flash");
-const isAuthenticated = require("./middleware/isAuthenticated");
+const mwFlash = require("./middlewares/flash");
+const isAuthenticated = require("./middlewares/isAuthenticated");
 
 app.use(
   session({

@@ -2,7 +2,7 @@ const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
 const { Article, User } = require("../models");
 
-async function viewHome(req, res) {
+async function showHome(req, res) {
   const articles = await Article.findAll({
     limit: 4,
     order: [["createdAt", "DESC"]],
@@ -26,5 +26,5 @@ async function viewHome(req, res) {
 }
 
 module.exports = {
-  viewHome,
+  showHome,
 };
